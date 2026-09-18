@@ -3,14 +3,9 @@ import java.util.Random;
 
 void main() {
 
-    boolean playAgian = true;
+    guessNumberGame();
 
-    while (playAgian) {
-        startMenu();
-        playAgian = gameMenu();
-    }
 }
-
 //Metoder
 
 //Start menu
@@ -35,7 +30,7 @@ static void startMenu() {
 
 //Vælg menu
 
-static boolean gameMenu() {
+static void gameMenu() {
 
     Scanner input = new Scanner(System.in);
     int spil = input.nextInt();
@@ -66,16 +61,8 @@ static boolean gameMenu() {
         default:
             System.out.println("Ukendt værdi, vælg 1, 2, 3 eller 4");
             System.out.println();
-            return true;
-    }
-    System.out.println("Har du lyst til at spille igen? (ja/nej)");
-    String svar = input.nextLine();
-
-    if (svar.equalsIgnoreCase("ja")) {
-        return true;
-    } else {
-        System.out.println("Spillet lukker. Tak for i dag!");
-        return false;
+            gameMenu();
+            break;
     }
 }
 
@@ -207,4 +194,22 @@ static int guess250 () {
         guesses++;
     }
     return guesses;
+}
+
+static void guessNumberGame () {
+    Scanner input = new Scanner(System.in);
+    boolean playAgian;
+
+    do {
+        startMenu();
+        gameMenu();
+
+        System.out.println("Vil du spille igen? (ja/nej)");
+        String response = input.nextLine();
+        playAgian = response.equalsIgnoreCase("ja");
+
+    } while (playAgian);
+
+    System.out.println("Spillet lukker ned");
+
 }

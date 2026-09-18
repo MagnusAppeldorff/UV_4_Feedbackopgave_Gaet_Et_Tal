@@ -10,7 +10,8 @@ Efter hvert forsøg får brugeren af vide, om tallet er for højt eller for lavt
 
 
     Hvordan vi har opdelt programmet i metoder:
-void main () Startpunktet, her styres spillet og dens genstartsløkke.
+
+guessNumberGame () Her styrers genstartsløkken, og om brugeren vil spille igen og kalder derefter menuerne.
 
 startMenu () Her udskriver spilmenuen med de forskellige spil og sværhedsgrader.
 
@@ -31,33 +32,20 @@ De eneste bestemte parameter er i væres randomNum.nextInt() i de forskellige sp
 
 
     Ekesmpel på en metode med returværdi:
-static boolean gameMenu() {
+static int guess10 () {
 
 //kode
 
-System.out.println("Har du lyst til at spille igen? (ja/nej)");
+return guesses;
 
-String svar = input.nextLine();
-
-if (svar.equalsIgnoreCase("ja")) {
-
-return true;
-
-} else {
-
-System.out.println("Spillet lukker. Tak for i dag!");
-
-return false;
-
-
-Her bruger vi en returværdi til at genstarte spillet eller stoppe det, afhængigt om brugeren skirver "ja" eller "nej"
+Når spilleren gætter rigtigt, returnerer metoden variablen guesses (antallet af forsøg). Denne returværdi sendes tilbage til gameMenu()
 
 
     Løkker i spillet og hvorfor:
-I main har vi en while-løkke. while(playAgain) den sørger for at spillet køre for evigt indtil at brugeren skriver "nej".
-Vi bruger den da vi ikke ved hvor spil brugeren vil spille.
+I guessNumberGame(): Vi bruger en do-while-løkke til at håndtere, om spillet skal køre igen. 
+Vi har valgt en do-while frem for en almindelig while-løkke, fordi spillet altid skal køres mindst én gang, før det giver mening at spørge brugeren, om de vil spille igen.
 
-I gætte metoden har vi også brugt while-løkker til at styre selve gætteprocessen. while(guess != computerNum10).
+I guess(): har vi også brugt while-løkker til at styre selve gætteprocessen. while(guess != computerNum10).
 Her bliver spillet ved med at køre når guess ikke er = computerNum10 og vi ikke ved hvor mange forsøg brugeren skal bruge.
 
     Test af programmet:
@@ -69,8 +57,6 @@ På sværhedsgrad 2, 3 og 4 testede vi at spillede stoppede når brugeren nåde 
 Vi testede at egualsIgnoreCase virkede da svarene både, "ja", "JA","nej" og "Nej" alle virkede og genstarter spillet.
 
     Fejl og udfordring:
-playAgain, kunne vi ikke få til at stå i en metode for sig, vi var derfor nødt til at skrive den oppe i main.
-
 Vi havde et problem med at vores guesses blev talt forkert op. 
 Hvis brugeren gættede tallet på sit sidste gæt, talte den totale gæt op til 11 i stedet for 10.
 Vi løste det ved at have en break efter brugeren gættede rigtigt på sidst forsøg. Derfor gik den ikke ned og tog den sidste guesses++ med. (linje 130-143).
